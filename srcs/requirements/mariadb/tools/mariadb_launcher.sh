@@ -9,9 +9,10 @@ if [ ! -d /var/lib/mysql/wordpress ]; then
 fi
 
 # Help on 1st launch with existed volume
-if [ ! -d "/run/mysqld" ]; then
-	mkdir -p /run/mysqld
-	chown -R mysql:mysql /run/mysqld
+if [ ! -d "/var/run/mysqld" ]; then
+	mkdir -p /var/run/mysqld
+	chown -R mysql:mysql /var/run/mysqld
 fi
 
-mysqld -u mysql -D
+# Don't use -D for daemon (container won't count it as process)
+mysqld -u mysql
