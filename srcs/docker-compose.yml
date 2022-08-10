@@ -1,20 +1,18 @@
-version: "3.9"
+version: "3.3"
 
 volumes:
   wordpress:
     driver: local
-    name: wordpress
     driver_opts:
       type: none
       o: bind
-      device: /home/samboon/data/wordpress
+      device: /home/${USER}/data/wordpress
   database:
     driver: local
-    name: database
     driver_opts:
       type: none
       o: bind
-      device: /home/samboon/data/mariadb
+      device: /home/${USER}/data/mariadb
 
 services:
 
