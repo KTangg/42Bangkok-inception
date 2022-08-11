@@ -9,12 +9,15 @@ echo "Connected to mariadb-server"
 if [ ! -f wp-config.php ]; then
 	wp core download --allow-root
 	wp config create --dbhost=$DB_HOST --dbname=$DB_NAME --dbuser=$MYSQL_USER --dbpass=$MYSQL_PASSWORD --allow-root
-	wp core install --url=localhost --title="Inception" --admin_name=$WP_ADMIN --admin_password=$WP_ADMIN_PASSWORD --admin_email=spoolpra@student.42bangkok.com --allow-root
-	wp user create $WP_USER armel@student.42bangkok.com --role=author --user_pass=$WP_USER_PASSWORD --allow-root
+	wp core install --url=$WP_ADDRESS --title=$WP_TITLE --admin_name=$WP_ADMIN --admin_password=$WP_ADMIN_PASSWORD --admin_email=$WP_ADMIN_EMAIL--skip-email --allow-root
+	wp user create $WP_USER $WP_USER_EMAIL --role=author --user_pass=$WP_USER_PASSWORD --allow-root
 	chown -R www-data:www-data /var/www/inception
 fi
 
-service php7.3-fpm start
-service php7.3-fpm stop
+# Create socket directory
+if [ ! -d /run/php ]; then
+	mkdir -p /run
+	mkdir -p /run/php
+fi
 
 /usr/sbin/php-fpm7.3 -F -R
