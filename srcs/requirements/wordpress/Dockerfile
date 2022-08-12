@@ -16,7 +16,10 @@ RUN apt-get update; \
 	php7.3-xml \
 	php7.3-zip \
 	php7.3-fpm \
-	mariadb-client
+	# Install mariadb-client use to connect to db server
+	mariadb-client \
+	# Install redis client
+	redis
 
 # Copy php-fpm.conf (Emergency restart & log level)
 COPY conf/php-fpm.conf /etc/php/7.3/fpm/php-fpm.conf

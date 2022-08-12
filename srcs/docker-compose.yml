@@ -61,6 +61,7 @@ services:
       WP_USER_EMAIL: ${WP_USER_EMAIL}
       WP_ADDRESS: ${WP_ADDRESS}
       WP_TITLE: ${WP_TITLE}
+      REDIS_PASS: ${REDIS_PASS}
 
   nginx:
     build: requirements/nginx/
@@ -100,8 +101,12 @@ services:
     container_name: redis
     volumes:
       - wordpress:/var/www/inception
+    ports:
+      - "6379:6379"
     depends_on:
       - wordpress
     networks:
       - website
     restart: always
+    environment:
+      REDIS_PASS: ${REDIS_PASS}
