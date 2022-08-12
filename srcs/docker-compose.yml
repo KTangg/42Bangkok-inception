@@ -44,6 +44,7 @@ services:
       - "9000:9000"
     depends_on:
       - mariadb
+      - redis
     networks:
       - website
       - database
@@ -86,8 +87,6 @@ services:
       - "20:20"
       - "21:21"
       - "40000-40009:40000-40009"
-    depends_on:
-      - wordpress
     networks:
       - website
     restart: always
@@ -103,8 +102,6 @@ services:
       - wordpress:/var/www/inception
     ports:
       - "6379:6379"
-    depends_on:
-      - wordpress
     networks:
       - website
     restart: always

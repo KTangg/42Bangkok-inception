@@ -2,8 +2,8 @@ FROM debian:buster
 
 # Install wordpress dependencies
 RUN apt-get update; \
-	# Install curl (Download wordpress-cli)
-	apt-get install -y curl \
+	# Install wget (Download wordpress-cli)
+	apt-get install -y wget \
 	# Install php (https://ubuntu.com/tutorials/install-and-configure-wordpress#2-install-dependencies)
 	php7.3 \
 	php7.3-bcmath \
@@ -27,7 +27,7 @@ COPY conf/php-fpm.conf /etc/php/7.3/fpm/php-fpm.conf
 COPY conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
 
 # Download && install wordpress cli
-RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar; \
+RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar; \
 	chmod +x wp-cli.phar; \
 	mv wp-cli.phar /usr/local/bin/wp
 
