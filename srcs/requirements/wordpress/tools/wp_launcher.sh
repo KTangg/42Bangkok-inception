@@ -19,11 +19,11 @@ if [ ! -f wp-config.php ]; then
 	wp config set WP_REDIS_READ_TIMEOUT "1" --allow-root --quiet
 	wp config set WP_REDIS_DATABASE "0" --allow-root --quiet
 	# Install redis plugin
-	wp plugin install redis-cache --activate --allow-root
+	wp plugin install redis-cache --activate --allow-root --quiet
 	# Enable redis plugin
-	wp redis enable --allow-root
+	wp redis enable --allow-root --quiet
 	# Install adminer
-	wget "https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1.php" -O adminer.php
+	wget "https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1.php" --quiet -O adminer.php
 fi
 
 chown -R www-data:www-data /var/www/inception
@@ -34,4 +34,5 @@ if [ ! -d /run/php ]; then
 	mkdir -p /run/php
 fi
 
+echo "Starting php-fpm server..."
 /usr/sbin/php-fpm7.3 -F -R

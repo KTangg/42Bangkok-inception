@@ -10,4 +10,5 @@ if [ $? -eq 0 ]; then
 	sed -i "s/foobared/$REDIS_PASS/1" /etc/redis/redis.conf
 fi
 
+echo "Starting redis-server..."
 /usr/bin/redis-server /etc/redis/redis.conf

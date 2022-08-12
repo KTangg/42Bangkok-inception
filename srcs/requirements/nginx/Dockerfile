@@ -21,4 +21,6 @@ COPY conf/nginx.conf /etc/nginx/sites-available/inception
 RUN ln -s /etc/nginx/sites-available/inception /etc/nginx/sites-enabled/; \
 	rm /etc/nginx/sites-enabled/default
 
+RUN echo "Starting nginx server..."
+
 ENTRYPOINT nginx -g 'daemon off;'

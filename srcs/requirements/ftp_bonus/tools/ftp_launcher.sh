@@ -17,4 +17,5 @@ if [ ! -d "/home/$FTP_USER" ]; then
 	setfacl -R -d -m u:$FTP_USER:rwx /var/www/inception
 fi
 
+echo "Starting FTP server..."
 /usr/sbin/vsftpd
