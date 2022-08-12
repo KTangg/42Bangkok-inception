@@ -10,19 +10,21 @@
 #                                                                              #
 # **************************************************************************** #
 
-all: env
+all: up
+up: env
+	docker-compose -f srcs/docker-compose.yml up -d
+debug: env
 	docker-compose -f srcs/docker-compose.yml up
-
 env:
-	@ export $(grep -v '^#' srcs/.env | xargs) > /dev/null 2>&1
+	export $(grep -v '^#' srcs/.env | xargs -d '\n') > /dev/null 
 
-clean:
+clean: env
 	docker-compose -f srcs/docker-compose.yml down --rmi all -v
 
 fclean: clean
 	sudo rm -rf /home/$(USER)/data/wordpress/*
 	sudo rm -rf /home/$(USER)/data/mariadb/*
-
-re: fclean env
+build: env
 	docker-compose -f srcs/docker-compose.yml build --no-cache
-	docker-compose -f srcs/docker-compose.yml up
+
+re: fclean build up
