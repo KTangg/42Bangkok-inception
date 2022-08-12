@@ -98,7 +98,7 @@ services:
   redis:
     build: requirements/redis_bonus/
     container_name: redis
-    volums:
+    volumes:
       - wordpress:/var/www/inception
     depends_on:
       - wordpress
