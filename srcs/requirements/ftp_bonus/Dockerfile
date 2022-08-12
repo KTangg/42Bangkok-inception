@@ -1,20 +1,13 @@
 FROM debian:buster
 
-# Install ftp
+# Install ftp acl
 RUN apt-get update; \
-	apt-get install -y vsftpd
-
-RUN mkdir -p /home/test; \
-	mkdir -p /home/test/ftp; \
-	chown nobody:nogroup /home/test/ftp; \
-	chmod a-w /home/test/ftp; \
-	mkdir -p /home/test/ftp/files; \
-	chown test:test /home/test/ftp/files; \
-	echo "test" > /etc/vsftpd.userlist; \
-	echo "test file" > /home/test/ftp/files/test.txt
+	apt-get install -y vsftpd acl
 
 # Setting configuration in container
 COPY conf/vsftpd.conf /etc/vsftpd.conf
 
+# Clone launching file
+COPY tools/ftp_launcher.sh /tmp/ftp_launcher.sh
 
-ENTRYPOINT sleep infinity
+ENTRYPOINT sh /tmp/ftp_launcher.sh

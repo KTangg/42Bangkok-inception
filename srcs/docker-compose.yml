@@ -14,6 +14,10 @@ volumes:
       o: bind
       device: /home/${USER}/data/mariadb
 
+networks:
+  database:
+  website:
+
 services:
 
   mariadb:
@@ -22,7 +26,7 @@ services:
     volumes:
       - database:/var/lib/mysql
     ports:
-      - 3306:3306
+      - "3306:3306"
     networks:
       - database
     restart: always
@@ -37,7 +41,7 @@ services:
     volumes:
       - wordpress:/var/www/inception
     ports:
-      - 9000:9000
+      - "9000:9000"
     depends_on:
       - mariadb
     networks:
@@ -64,8 +68,8 @@ services:
     volumes:
       - wordpress:/var/www/inception
     ports:
-      - 80:80
-      - 443:443
+      - "80:80"
+      - "443:443"
     depends_on:
       - wordpress
     networks:
@@ -78,15 +82,26 @@ services:
     volumes:
       - wordpress:/var/www/inception
     ports:
-      - 20:20
-      - 21:21
+      - "20:20"
+      - "21:21"
+      - "40000-40009:40000-40009"
     depends_on:
       - wordpress
     networks:
       - website
     restart: always
+    environment:
+      FTP_USER: ${FTP_USER}
+      FTP_PASS: ${FTP_PASS}
+      FTP_GROUP: ${FTP_GROUP}
 
-
-networks:
-  database:
-  website:
+  redis:
+    build: requirements/redis_bonus/
+    container_name: redis
+    volums:
+      - wordpress:/var/www/inception
+    depends_on:
+      - wordpress
+    networks:
+      - website
+    restart: always
