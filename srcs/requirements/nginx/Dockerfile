@@ -8,8 +8,8 @@ RUN apt-get update; \
 	# Use only for testing
 	curl
 
-# Create certificates and key (Valid 30 day)
-RUN openssl req -x509 -nodes -days 30 -newkey rsa:2048 \
+# Create certificates and key (Valid 365 day)
+RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 	-keyout /etc/ssl/private/inception.key -out /etc/ssl/certs/inception.crt \
 	# Fill prompt information
 	-subj "/C=TH/ST=Bangkok/L=Bangkok/O=42Bangkok/OU=Crocodile/CN=spoolpra.42.fr"

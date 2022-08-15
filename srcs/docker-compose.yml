@@ -6,13 +6,14 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/${USER}/data/wordpress
+      device: ${HOME}/data/wordpress
   database:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/${USER}/data/mariadb
+      device: ${HOME}/data/mariadb
+
 
 networks:
   database:
@@ -107,3 +108,4 @@ services:
     restart: always
     environment:
       REDIS_PASS: ${REDIS_PASS}
+
