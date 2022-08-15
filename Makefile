@@ -6,7 +6,7 @@
 #    By: spoolpra <spoolpra@student.42bangkok.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/03 22:34:01 by spoolpra          #+#    #+#              #
-#    Updated: 2022/08/15 09:33:31 by spoolpra         ###   ########.fr        #
+#    Updated: 2022/08/15 18:14:49 by spoolpra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ clean:
 fclean: clean
 	sudo rm -rf $(HOME)/wordpress/*
 	sudo rm -rf $(HOME)/mariadb/*
+	sudo rm -rf $(HOME)/jenkin/*
 build: create_mount_dir
 	cd srcs && docker-compose build --no-cache
 
