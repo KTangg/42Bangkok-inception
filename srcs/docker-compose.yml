@@ -13,6 +13,12 @@ volumes:
       type: none
       o: bind
       device: ${HOME}/data/mariadb
+  jenkin:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${HOME}/data/jenkin
 
 
 networks:
@@ -109,3 +115,12 @@ services:
     environment:
       REDIS_PASS: ${REDIS_PASS}
 
+  jenkin:
+    build: requirements/jenkin_bonus/
+    container_name: jenkin
+    volumes:
+      - jenkin:/var/jenkins_home
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    restart: always
