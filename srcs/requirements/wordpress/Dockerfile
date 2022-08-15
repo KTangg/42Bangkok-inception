@@ -41,4 +41,7 @@ WORKDIR /var/www/inception
 # Copy wordpress container launcher
 COPY tools/wp_launcher.sh /tmp/wp_launcher.sh
 
+# Copy html contents
+ADD contents /tmp/contents
+
 ENTRYPOINT sh /tmp/wp_launcher.sh
