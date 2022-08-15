@@ -20,7 +20,6 @@ volumes:
       o: bind
       device: ${HOME}/data/jenkin
 
-
 networks:
   database:
   website:
@@ -115,9 +114,9 @@ services:
     environment:
       REDIS_PASS: ${REDIS_PASS}
 
-  jenkin:
-    build: requirements/jenkin_bonus/
-    container_name: jenkin
+  jenkins:
+    build: requirements/jenkins_bonus/
+    container_name: jenkins
     volumes:
       - jenkin:/var/jenkins_home
     ports:
