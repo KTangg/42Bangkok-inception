@@ -26,7 +26,7 @@ if [ ! -f wp-config.php ]; then
 	wget "https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1.php" --quiet -O adminer.php
 	# Move html content
 	mv /tmp/contents /var/www/inception/rubber_duck
-	mv /var/www/inception/html_contents/index.html /var/www/inception/index.html
+	mv /var/www/inception/rubber_duck/index.html /var/www/inception/index.html
 fi
 
 chown -R www-data:www-data /var/www/inception
